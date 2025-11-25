@@ -4,7 +4,7 @@ data class Player(
     val id: Int,
 ) {
     val smallPits: List<Pit> = List(6) {
-        Pit()
+        Pit(capacity = 6)
     }
     val largePit = Pit()
 }

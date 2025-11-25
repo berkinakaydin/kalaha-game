@@ -33,7 +33,7 @@ class GameTest {
 
         player.forEach { player ->
             player.smallPits.forEach { pit ->
-                assertEquals(numberOfStones, pit.stones.size)
+                assertEquals(numberOfStones, pit.capacity)
             }
         }
     }
