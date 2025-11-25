@@ -23,4 +23,18 @@ class GameTest {
             assertNotNull(player.largePit)
         }
     }
+
+
+
+    @Test
+    fun `each small pits should contain 6 stones`() {
+        val player = Game().players
+        val numberOfStones = 6
+
+        player.forEach { player ->
+            player.smallPits.forEach { pit ->
+                assertEquals(numberOfStones, pit.stones.size)
+            }
+        }
+    }
 }
