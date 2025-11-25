@@ -15,12 +15,12 @@ class GameTest {
     }
 
     @Test
-    fun `each player should have 6 pits and a large pit`(){
+    fun `each player should have 7 pits`(){
         val players = Game().players
+        val numberOfPits = 7
 
         players.forEach { player ->
-            assertEquals(player.pits.size, 6)
-            assertNotNull(player.largePit)
+            assertEquals(player.pits.size, numberOfPits)
         }
     }
 }
