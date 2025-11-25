@@ -7,4 +7,11 @@ data class Player(
         Pit(capacity = 6)
     }
     val largePit = Pit()
+
+    init {
+        for (i in 0 until smallPits.size - 1) {
+            smallPits[i].next = smallPits[i + 1]
+        }
+        smallPits.last().next = largePit
+    }
 }
