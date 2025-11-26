@@ -9,8 +9,8 @@ import kotlin.test.assertNotNull
 
 class GameTest {
     private val game: Game = Game()
-    private val player1: Player = game.player1
-    private val player2: Player = game.player2
+    private val player1: Player = game.players[0]
+    private val player2: Player = game.players[1]
 
     @Test
     fun `a game should contain two players`() {
@@ -54,5 +54,25 @@ class GameTest {
     fun `each players should be connected`() {
         assertThat(player1.largePit.next).isEqualTo(player2.smallPits.first())
         assertThat(player2.largePit.next).isEqualTo(player1.smallPits.first())
+    }
+
+    @Test
+    fun `when a player makes a move from first pit, stones should be sowed`(){
+        val chosenPitIndex = 0
+
+        val numberOfStones = player1.smallPits[chosenPitIndex].capacity
+        val oldStateOfSmallPits = player1.smallPits
+        val oldStateOfLargePit = player1.largePit
+
+        game.makeMove(chosenPitIndex)
+        assertThat(player1.smallPits[chosenPitIndex].capacity).isEqualTo(0)
+
+        assertSoftly { softly ->
+            repeat(numberOfStones){ i ->
+                softly.assertThat(player1.smallPits[chosenPitIndex + i].capacity).isEqualTo(oldStateOfSmallPits[chosenPitIndex + i].capacity + 1)
+            }
+        }
+
+        assertThat(player1.largePit.capacity).isEqualTo(oldStateOfLargePit.capacity + 1)
     }
 }
