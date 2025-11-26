@@ -77,4 +77,16 @@ class GameTest {
             oldStateOfCurrentPit = oldPit
         }
     }
+
+    @Test
+    fun `while sowing the stones, stone should not be placed in opponents large pit`(){
+        val chosenPitIndex = 0
+        var currentPit = player1.smallPits[chosenPitIndex]
+        currentPit.capacity = 13
+
+        val currentStateOfOpponent = player2.copy()
+
+        game.makeMove(chosenPitIndex)
+        assertThat(player2.largePit.capacity).isEqualTo(currentStateOfOpponent.largePit.capacity)
+    }
 }
