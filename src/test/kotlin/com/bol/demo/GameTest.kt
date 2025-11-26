@@ -49,4 +49,10 @@ class GameTest {
             it.assertThat(player1.largePit).isEqualTo(player1.smallPits.last().next)
         }
     }
+
+    @Test
+    fun `each players should be connected`(){
+        assertThat(player1.largePit.next).isEqualTo(player2.smallPits.first())
+        assertThat(player2.largePit.next).isEqualTo(player1.smallPits.first())
+    }
 }
