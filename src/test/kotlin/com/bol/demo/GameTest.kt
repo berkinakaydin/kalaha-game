@@ -9,8 +9,8 @@ import kotlin.test.assertNotNull
 
 class GameTest {
     private val game: Game = Game()
-    private val player1: Player = game.players[0]
-    private val player2: Player = game.players[1]
+    private val player1: Player = game.player1
+    private val player2: Player = game.player2
 
     @Test
     fun `a game should contain two players`() {
@@ -51,7 +51,7 @@ class GameTest {
     }
 
     @Test
-    fun `each players should be connected`(){
+    fun `each players should be connected`() {
         assertThat(player1.largePit.next).isEqualTo(player2.smallPits.first())
         assertThat(player2.largePit.next).isEqualTo(player1.smallPits.first())
     }

@@ -14,4 +14,8 @@ data class Player(
         }
         smallPits.last().next = largePit
     }
+
+    fun connectToOpponent(opponent: Player) {
+        largePit.next = opponent.smallPits.first()
+    }
 }
