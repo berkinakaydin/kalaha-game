@@ -160,6 +160,38 @@ class GameTest {
             assertThat(opponentsPit.capacity).isEqualTo(0)
             assertThat(emptyPit.capacity).isEqualTo(0)
         }
+
+        @Test
+        fun `if player chooses an empty pit, then player wont move`(){
+            //given
+            val chosenPitIndex = 0
+            val currentPlayer = game.currentPlayer
+            val currentPit = currentPlayer.smallPits[chosenPitIndex]
+            currentPit.capacity = 0
+
+            //when
+            val result = runCatching { game.play(chosenPitIndex) }
+
+            //then
+            assertThat(result.isFailure).isTrue()
+            assertThat(result.exceptionOrNull()).isInstanceOf(IllegalArgumentException::class.java)
+            assertThat(game.currentPlayer).isEqualTo(currentPlayer)
+        }
+
+        @Test
+        fun `if player chooses invalid pit, then player wont move`(){
+            //given
+            val chosenPitIndex = 6
+            val currentPlayer = game.currentPlayer
+
+            //when
+            val result = runCatching { game.play(chosenPitIndex) }
+
+            //then
+            assertThat(result.isFailure).isTrue()
+            assertThat(result.exceptionOrNull()).isInstanceOf(IllegalArgumentException::class.java)
+            assertThat(game.currentPlayer).isEqualTo(currentPlayer)
+        }
     }
 
     @Test
