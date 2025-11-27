@@ -195,23 +195,51 @@ class GameTest {
         }
     }
 
-    @Test
-    fun `end game`() {
-        //given
-        val chosenPitIndex = 5
-        val currentPit = game.currentPlayer.smallPits[chosenPitIndex]
-        currentPit.capacity = 2
+    @Nested
+    @DisplayName("End Game Scenarios")
+    inner class EndGameTests{
+        @Test
+        fun `end game`() {
+            //given
+            val chosenPitIndex = 5
+            val currentPit = game.currentPlayer.smallPits[chosenPitIndex]
+            currentPit.capacity = 2
 
-        //when
-        game.currentPlayer.smallPits.filter { it != currentPit }.map { it.capacity = 0 }
-        game.opponent.smallPits.map { it.capacity = 10 }
-        game.currentPlayer.largePit.capacity = 50
+            //when
+            game.currentPlayer.smallPits.filter { it != currentPit }.map { it.capacity = 0 }
+            game.opponent.smallPits.map { it.capacity = 10 }
+            game.currentPlayer.largePit.capacity = 50
 
-        game.play(chosenPitIndex)
+            game.play(chosenPitIndex)
 
-        //then
-        assertThat(game.currentPlayer.largePit.capacity).isEqualTo(51)
-        assertThat(game.opponent.largePit.capacity).isEqualTo(61)
-        assertThat(game.winner).isNotNull.isEqualTo(game.opponent)
+            //then
+            assertThat(game.currentPlayer.largePit.capacity).isEqualTo(51)
+            assertThat(game.opponent.largePit.capacity).isEqualTo(61)
+            assertThat(game.winner).isNotNull.isEqualTo(game.opponent)
+        }
+
+        @Test
+        fun `tie game when both players have equal scores`(){
+            //given
+            val chosenPitIndex = 5
+            val currentPit = game.currentPlayer.smallPits[chosenPitIndex]
+            currentPit.capacity = 1
+
+            //when
+            game.currentPlayer.smallPits.filter { it != currentPit }.map { it.capacity = 0 }
+            game.opponent.smallPits.map { it.capacity = 10 }
+
+            game.currentPlayer.largePit.capacity = 60
+            game.opponent.largePit.capacity = 1
+
+            game.play(chosenPitIndex)
+
+            //then
+            assertThat(game.currentPlayer.largePit.capacity).isEqualTo(61)
+            assertThat(game.opponent.largePit.capacity).isEqualTo(61)
+            assertThat(game.winner).isNull()
+        }
     }
+
+
 }
