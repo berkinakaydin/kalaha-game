@@ -9,6 +9,7 @@ class Game {
     var opponent = if (currentPlayer == player1) player2 else player1
 
     var winner: Player? = null
+    var isFinished = false
 
     init {
         setUp()
@@ -19,10 +20,10 @@ class Game {
         player2.connectToOpponent(player1)
     }
 
-    fun play(pitIndex: Int) {
+    fun play(pitIndex: Int): Result? {
         val currentPit = makeMove(pitIndex)
 
-        val isFinished = checkEndGame()
+        isFinished = checkEndGame()
 
         if (isFinished){
             winner = if (currentPlayer.largePit.capacity > opponent.largePit.capacity) {
@@ -33,12 +34,18 @@ class Game {
                 null
             }
 
-            return
+            return when(winner){
+                player1 -> Result.PLAYER_1_WON
+                player2 -> Result.PLAYER_2_WON
+                else -> Result.TIE
+            }
         }
 
         if (currentPit != currentPlayer.largePit) {
             changePlayer()
         }
+
+        return null
     }
 
     fun makeMove(pitIndex: Int): Pit {
@@ -84,6 +91,10 @@ class Game {
         require(currentPlayer.smallPits[pitIndex].capacity > 0){
             "Pit is empty"
         }
+
+        check(!isFinished){
+            "Game is already over"
+        }
     }
 
     private fun changePlayer() {
@@ -101,5 +112,11 @@ class Game {
             return true
         }
         return false
+    }
+
+    enum class Result{
+        PLAYER_1_WON,
+        PLAYER_2_WON,
+        TIE
     }
 }
