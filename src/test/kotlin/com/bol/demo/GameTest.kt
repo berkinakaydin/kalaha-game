@@ -127,5 +127,16 @@ class GameTest {
 
             assertThat(game.currentPlayer).isEqualTo(player2)
         }
+
+        @Test
+        fun `if players last stone lands in own big pit, then current player gets another turn`(){
+            val chosenPitIndex = 0
+            val currentPit = player1.smallPits[chosenPitIndex]
+
+            currentPit.capacity = 6
+            game.play(chosenPitIndex)
+
+            assertThat(game.currentPlayer).isEqualTo(game.currentPlayer)
+        }
     }
 }
