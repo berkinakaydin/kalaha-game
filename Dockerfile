@@ -11,7 +11,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests && java -Djarmode=layertools -jar target/*.jar extract
 
 # Runtime stage
-FROM amazoncorretto:21-alpine
+FROM amazoncorretto:25-alpine
 WORKDIR /app
 
 # Create non-root user
