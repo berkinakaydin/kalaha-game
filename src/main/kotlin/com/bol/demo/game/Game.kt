@@ -6,7 +6,7 @@ class Game {
     val players = listOf(player1, player2)
 
     var currentPlayer = player1
-    val opponent = if (currentPlayer == player1) player2 else player1
+    var opponent = if (currentPlayer == player1) player2 else player1
 
     var winner: Player? = null
 
@@ -70,7 +70,9 @@ class Game {
 
     fun changePlayer() {
         val opponent = if (currentPlayer == player1) player2 else player1
+        val tempPlayer = currentPlayer
         currentPlayer = opponent
+        this.opponent = tempPlayer
     }
 
     fun checkEndGame() {
