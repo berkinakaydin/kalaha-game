@@ -6,6 +6,9 @@ class Game {
     val players = listOf(player1, player2)
 
     var currentPlayer = player1
+    val opponent = if (currentPlayer == player1) player2 else player1
+
+    var winner: Player? = null
 
     init {
         setUp()
@@ -19,14 +22,18 @@ class Game {
     fun play(pitIndex: Int) {
         val currentPit = makeMove(pitIndex)
 
+        checkEndGame()
+
+        if (winner != null){
+            return
+        }
+
         if (currentPit != currentPlayer.largePit) {
             changePlayer()
         }
     }
 
     fun makeMove(pitIndex: Int): Pit {
-        val opponent = if (currentPlayer == player1) player2 else player1
-
         var currentPit = currentPlayer.smallPits[pitIndex]
         var numberOfStones = currentPit.capacity
 
@@ -64,5 +71,18 @@ class Game {
     fun changePlayer() {
         val opponent = if (currentPlayer == player1) player2 else player1
         currentPlayer = opponent
+    }
+
+    fun checkEndGame() {
+        if (currentPlayer.smallPits.all { it.capacity == 0 }) {
+            opponent.largePit.capacity += opponent.smallPits.sumOf { it.capacity }
+            opponent.smallPits.map { it.capacity = 0 }
+
+            winner = if (currentPlayer.largePit.capacity > opponent.largePit.capacity) {
+                currentPlayer
+            } else {
+                opponent
+            }
+        }
     }
 }

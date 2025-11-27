@@ -118,7 +118,7 @@ class GameTest {
         }
 
         @Test
-        fun `if players last stone lands not in own big pit, then opponent gets the turn`(){
+        fun `if players last stone lands not in own big pit, then opponent gets the turn`() {
             val chosenPitIndex = 0
             val currentPit = player1.smallPits[chosenPitIndex]
 
@@ -129,7 +129,7 @@ class GameTest {
         }
 
         @Test
-        fun `if players last stone lands in own big pit, then current player gets another turn`(){
+        fun `if players last stone lands in own big pit, then current player gets another turn`() {
             val chosenPitIndex = 0
             val currentPit = player1.smallPits[chosenPitIndex]
 
@@ -140,7 +140,7 @@ class GameTest {
         }
 
         @Test
-        fun `if players last stone lands in own small pit, player captures stones from the opposite pit`(){
+        fun `if players last stone lands in own small pit, player captures stones from the opposite pit`() {
             // given
             val chosenPitIndex = 0
             val currentPit = player1.smallPits[chosenPitIndex]
@@ -163,7 +163,7 @@ class GameTest {
     }
 
     @Test
-    fun `end game`(){
+    fun `end game`() {
         //given
         val chosenPitIndex = 5
         val currentPit = player1.smallPits[chosenPitIndex]
