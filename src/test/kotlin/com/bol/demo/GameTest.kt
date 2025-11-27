@@ -193,6 +193,19 @@ class GameTest {
             assertThat(result.exceptionOrNull()).isInstanceOf(IllegalArgumentException::class.java)
             assertThat(game.currentPlayer).isEqualTo(currentPlayer)
         }
+
+        @Test
+        fun `prevent player movement if game has a winner`(){
+            //given
+            game.isFinished = true
+
+            //when
+            val result = runCatching { game.play(0) }
+
+            //then
+            assertThat(result.isFailure).isTrue()
+            assertThat(result.exceptionOrNull()).isInstanceOf(IllegalStateException::class.java)
+        }
     }
 
     @Nested
@@ -240,6 +253,4 @@ class GameTest {
             assertThat(game.winner).isNull()
         }
     }
-
-
 }
