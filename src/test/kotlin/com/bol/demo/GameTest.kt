@@ -161,4 +161,24 @@ class GameTest {
             assertThat(emptyPit.capacity).isEqualTo(0)
         }
     }
+
+    @Test
+    fun `end game`(){
+        //given
+        val chosenPitIndex = 5
+        val currentPit = player1.smallPits[chosenPitIndex]
+        currentPit.capacity = 2
+
+        //when
+        player1.smallPits.filter { it != currentPit }.map { it.capacity = 0 }
+        player2.smallPits.map { it.capacity = 10 }
+        player1.largePit.capacity = 50
+
+        game.play(chosenPitIndex)
+
+        //then
+        assertThat(player1.largePit.capacity).isEqualTo(51)
+        assertThat(player2.largePit.capacity).isEqualTo(61)
+        assertThat(game.winner).isNotNull.isEqualTo(player2)
+    }
 }
