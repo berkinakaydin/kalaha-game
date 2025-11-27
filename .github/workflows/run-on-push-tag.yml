@@ -44,8 +44,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/demo:latest
-            ghcr.io/${{ github.repository_owner }}/demo:${{ steps.version.outputs.version }}
-            ghcr.io/${{ github.repository_owner }}/demo:${{ steps.version.outputs.tag }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/demo:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/demo:buildcache,mode=max
+            ghcr.io/${{ github.repository_owner }}/kalaha:latest
+            ghcr.io/${{ github.repository_owner }}/kalaha:${{ steps.version.outputs.version }}
+            ghcr.io/${{ github.repository_owner }}/kalaha:${{ steps.version.outputs.tag }}
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/kalaha:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/kalaha:buildcache,mode=max

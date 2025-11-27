@@ -1,4 +1,4 @@
-package com.bol.demo.game
+package com.bol.kalaha.game
 
 class Pit(
     var capacity: Int = 0,

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bol</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>kalaha</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>kalaha</name>
+	<description>kalaha project for Spring Boot</description>
 
 	<properties>
 		<java.version>21</java.version>

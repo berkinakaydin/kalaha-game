@@ -1,6 +1,6 @@
-package com.bol.demo
+package com.bol.kalaha
 
-import com.bol.demo.game.Game
+import com.bol.kalaha.game.Game
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.SoftAssertions.assertSoftly
 import org.junit.jupiter.api.BeforeEach

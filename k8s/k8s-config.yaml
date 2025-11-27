@@ -10,25 +10,25 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-app
+  name: kalaha-app
   namespace: development
   labels:
-    app: demo-app
+    app: kalaha-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: demo-app
+      app: kalaha-app
   template:
     metadata:
       labels:
-        app: demo-app
+        app: kalaha-app
     spec:
       imagePullSecrets:
         - name: ghcr-secret
       containers:
         - name: app
-          image: ghcr.io/berkinakaydin/demo:latest
+          image: ghcr.io/berkinakaydin/kalaha:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -59,12 +59,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-app-service
+  name: kalaha-app-service
   namespace: development
 spec:
   type: ClusterIP
   selector:
-    app: demo-app
+    app: kalaha-app
   ports:
     - protocol: TCP
       port: 8080
@@ -74,20 +74,20 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: demo-app-ingress
+  name: kalaha-app-ingress
   namespace: development
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: demo-app.local
+    - host: kalaha-app.local
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: demo-app-service
+                name: kalaha-app-service
                 port:
                   number: 8080
 
@@ -96,13 +96,13 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: demo-app-hpa
+  name: kalaha-app-hpa
   namespace: development
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: demo-app
+    name: kalaha-app
   minReplicas: 2
   maxReplicas: 5
   metrics:

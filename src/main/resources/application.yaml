@@ -10,4 +10,4 @@ management:
       show-details: always
 spring:
   application:
-    name: demo
+    name: kalaha

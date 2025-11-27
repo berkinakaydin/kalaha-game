@@ -1,4 +1,4 @@
-package com.bol.demo.game
+package com.bol.kalaha.game
 
 class Game {
     val player1 = Player(1)

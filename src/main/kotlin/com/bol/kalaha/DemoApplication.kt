@@ -1,11 +1,11 @@
-package com.bol.demo
+package com.bol.kalaha
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class DemoApplication
+class kalahaApplication
 
 fun main(args: Array<String>) {
-	runApplication<DemoApplication>(*args)
+	runApplication<kalahaApplication>(*args)
 }
