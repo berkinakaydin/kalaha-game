@@ -1,5 +1,5 @@
 # Build stage
-FROM maven:3-amazoncorretto-21-alpine AS builder
+FROM maven:3-amazoncorretto-25-alpine AS builder
 WORKDIR /app
 
 # Copy pom.xml and download dependencies (cached layer)
